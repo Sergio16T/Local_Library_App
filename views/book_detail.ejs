@@ -51,10 +51,10 @@
 
         <p> <strong> Author:</strong>
             <a href=<%= book.author.url%>> <%= book.author.name %></a>
-        </p>
-        <p> <strong> Summary:</strong><%- book.summary %></p>
-        <p> <strong> ISNB:</strong><%= book.isbn %></p>
-        <p> <strong> Genre:</strong> &nbsp;
+        </p><br>
+        <p> <strong> Summary:</strong><%- book.summary %></p> <br>
+        <p> <strong> ISNB:</strong><%= book.isbn %></p> <br>
+        <p> <strong> Genre:</strong> &nbsp; <br>
             <% book.genre.forEach((value,index)=> { %> 
                 <a href = <%= value.url %>> <%= value.name %> </a> 
            <% if (index < book.genre.length -1) { %>
@@ -71,15 +71,17 @@
                         <p class="text-danger"><%= value.status%></p>
                      <% } else { %>
                         <p class="text-warning"><%= value.status %></p>
-                        <p><strong> Imprint:</strong><%= value.imprint %></p>
-                     <% } %>
+                        <% } %> <br>
+                        <p><strong> Imprint:</strong><%= value.imprint %></p> <br>
+                     
                      <% if (value.status != 'Available') { %>
-                        <p><strong>Due back:</strong> <%= value.due_back %></p>
+                        <p><strong>Due back:</strong> <%= value.due_back %></p> <br>
                         <p><strong>Id:</strong>&nbsp; <a href=<%= value.url %>> <%= value._id %></a></p>
-                     <% } else { %>
+                     <% } else if(value.status != 'Available'| 'Maintenance' | 'Loaned' | 'Reserved')  { %>
                         <p>There are no copies of this book in the library</p>
                     <% } %>
                    <% }) %>
+                   
             </div>
            
 

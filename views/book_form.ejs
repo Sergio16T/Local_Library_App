@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'> 
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+    <div class= 'col-sm-2 sidebarContainer'>
+    <ul class ='sidebar-nav'>
+        <li>
+          <a href="/catalog">Home</a>
+        </li>
+        <li>
+          <a href="/catalog/books">All books</a>
+        </li>
+        <li>
+          <a href="/catalog/authors">All authors</a>
+        </li>
+        <li>
+          <a href="/catalog/genres">All genres</a>
+        </li>
+        <li>
+          <a href="/catalog/bookinstances">All book-instances</a>
+        </li>
+
+            <hr>
+
+        <li>
+          <a href="/catalog/author/create">Create new author</a>
+        </li>
+        <li>
+          <a href="/catalog/genre/create">Create new genre</a>
+        </li>
+        <li>
+          <a href="/catalog/book/create">Create new book</a>
+        </li>
+        <li>
+          <a href="/catalog/bookinstance/create">Create new book instance (copy)</a>
+        </li>
+     </ul>
+    </div>
+    <div class ='container-fluid'>
+    <div class ='col-sm-10'>
+        <h1><%= title %></h1>
+        <form method ="POST" action="">
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input id="title" class="form-control" type="text" placeholder="Name of Book" name='title' required = true value= <%= locals.book ? book.title : '' %> >
+            </div>
+            <div class ="form-group">
+                <label for="author">Author:</label>
+                <select id="author" class="form-control" type="select" placeholder="Select Author" name = "author" required="true">
+                 
+                    <% authors.forEach(author => {
+                          if (locals.book) { %>
+                            <option value="<%= author._id %>" selected =<%= author._id.toString() == locals.book.author ? "selected" : false %>> <%= author.name %></option>
+                       <% } else { %> 
+                            <option value=<%= author._id %>> <%= author.name%> </option>
+                       <% } %>
+                  
+                   <% }) %> 
+                </select>
+            </div>
+            <div class="form-group">
+                <label for ="summary"> Summary: </label>
+                <textarea id="summary" class="form-control" rows="3" placeholder="Summary" name="summary" required="true"><%= locals.book ? locals.book.summary : '' %></textarea>
+            </div>
+            <div class="form-group">
+                <label for ="isbn"> ISBN: </label>
+                <input id="isbn" class="form-control" type="text" placeholder="ISBN13" name="isbn" required="true" value = <%= locals.book ? book.isnb : '' %>>
+            </div>
+            <div class="form-group">
+                <label>Genre:</label>
+                <div>
+                    <% genres.forEach(genre => { %>
+                        <div style='display: inline; padding-right: 10px'>
+                            <input class="checkbox-input" type="checkbox" name="genre" id= "<%= genre._id %>" value= <%= genre._id %>>
+                            <label for="<%= genre._id %>"> <%= genre.name %></label>
+                        </div>
+                   <% }); %> 
+                </div>
+            </div>
+            <button class ="btn btn-primary" type ="submit">Submit</button>
+        </form> 
+        <% if (locals.errors) { %>
+            <ul>
+                <% for(error in errors) { %>
+                    <li><%= error.message %></li>
+              <%  } %> 
+            </ul>
+        <% } %> 
+    </div>
+    </div>
+  <!-- 
+
+    <div class='row'>
+      
+        
+    </div>
+  </div>
+  -->
+</body>
+</html>

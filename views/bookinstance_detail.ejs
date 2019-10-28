@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'> 
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+    <div class= 'col-sm-2 sidebarContainer'>
+    <ul class ='sidebar-nav'>
+        <li>
+          <a href="/catalog">Home</a>
+        </li>
+        <li>
+          <a href="/catalog/books">All books</a>
+        </li>
+        <li>
+          <a href="/catalog/authors">All authors</a>
+        </li>
+        <li>
+          <a href="/catalog/genres">All genres</a>
+        </li>
+        <li>
+          <a href="/catalog/bookinstances">All book-instances</a>
+        </li>
+
+            <hr>
+
+        <li>
+          <a href="/catalog/author/create">Create new author</a>
+        </li>
+        <li>
+          <a href="/catalog/genre/create">Create new genre</a>
+        </li>
+        <li>
+          <a href="/catalog/book/create">Create new book</a>
+        </li>
+        <li>
+          <a href="/catalog/bookinstance/create">Create new book instance (copy)</a>
+        </li>
+     </ul>
+    </div>
+    <div class ='container-fluid'>
+    <div class ='col-sm-10'>
+      <h1>ID: <%= bookinstance._id %></h1>
+        <p><strong>Title:</strong>
+            <a href= <%= bookinstance.book.url %>><%= bookinstance.book.title%></a>
+        </p> <br>
+        <p><strong>Imprint:</strong><%= bookinstance.imprint%></p> <br>
+        <p>
+        <strong>Status:</strong>
+        <% if (bookinstance.status == 'Available') { %>
+            <span class = "text-success"><%= bookinstance.status %> </span> 
+        <% } else if (bookinstance.status == 'Maintenance') { %>
+            <span class ="text-danger"><%= bookinstance.status %></span> 
+        <% } else { %>
+            <span class="text-warning"><%= bookinstance.status %></span> 
+
+        <% } %> 
+        </p> <br>
+        <% if (bookinstance.status != 'Available') { %>
+            <p><strong> Due back:</strong> <%= bookinstance.due_back_formatted %></p>
+        <% } %>
+       
+      
+                
+        
+    </div>
+    </div>
+  <!-- 
+
+    <div class='row'>
+      
+        
+    </div>
+  </div>
+  -->
+</body>
+</html>

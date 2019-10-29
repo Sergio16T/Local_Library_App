@@ -55,7 +55,7 @@
             <dt>
                 <a href = <%= book.url %>> <%= book.title %> </a> 
             </dt>
-            <dd> <%= book.summary %> </dd>
+            <dd> <%- book.summary %> </dd>
             <% }) %>
             <% if (genre_books.length == 0) { %>
                 <p>This genre has no books</p>

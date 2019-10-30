@@ -47,25 +47,32 @@
     </div>
     <div class ='container-fluid'>
     <div class ='col-sm-10'>
-      <h1>Genre: <%= genre.name %></h1>
-        <div style ='margin-left:20px; margin-top: 20px'>
-        <h4> Books </h4>
-        <dl>
-            <% genre_books.forEach(book => { %>
-            <dt>
-                <a href = <%= book.url %>> <%= book.title %> </a> 
-            </dt>
-            <dd> <%- book.summary %> </dd>
-            <% }) %>
-            <% if (genre_books.length == 0) { %>
-                <p>This genre has no books</p>
+        <h1> <%= title %></h1>
+        <% if(book_instances.length) {%>
+            <p><strong>Delete the following book instances before attempting to delete this book.</strong></p>
+            <div style ='margin-left: 20px; margin-top:20px'>
+                <h4>Book instances</h4>
+                <dl>
+                    <% book_instances.forEach(book => { %>
+                    <dt>
+                        <a href = <%= book.url %> > <%= book._id %> </a>
+                    </dt>
+                    <% }); %>
+                    <% } else { %> 
+                        <p> Do you really want to delete this Book?</p>      
+                </dl>
+            </div>
+            <form method ='POST' action =''>
+                <div class="form-group">
+                    <input id="bookid" class="form-control" type="hidden" name ="bookid" required='true' value = <%= book._id %>> 
+                    <button class="btn btn-primary" type="submit">Delete</button>
+                </div>
+            </form>
             <% } %>
-        </dl>
-        </div>
-        <hr>
-        <p>
-            <a href=<%= genre.url + '/delete' %>>Delete genre</a>
-        </p> 
+
+         
+
+       
     </div>
     </div>
   <!-- 

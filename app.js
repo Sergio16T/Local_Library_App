@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 //var mongoDB = 'mongodb+srv://Sergio16T:WA0kRRdArqaw8nXQ@cluster0-baec4.gcp.mongodb.net/test?retryWrites=true&w=majority'; 
 var mongoDB = 'mongodb+srv://Sergio16T:WA0kRRdArqaw8nXQ@cluster0-baec4.gcp.mongodb.net/local_library?retryWrites=true&w=majority';
 mongoose.connect(mongoDB, {useUnifiedTopology: true, useNewUrlParser: true });
-var db = mongoose.connection; 
+var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:')); 
 var path = require('path');
 var cookieParser = require('cookie-parser');

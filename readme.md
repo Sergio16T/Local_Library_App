@@ -10,6 +10,8 @@ Independently built the following in the "challenge yourself sections" of tutori
 - Date formatting using Moment 
 
 Some of the other libaries/modules most used during the build process
-Async 
-Express Validator 
-Moment 
+- Async 
+- Express Validator 
+- Moment 
+
+![Local Library Screen Shot](/public/images/screenshot.png)

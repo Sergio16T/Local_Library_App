@@ -172,7 +172,7 @@ exports.book_delete_get = function(req, res, next){
         if (results.book == null){
             res.redirect('/catalog/books'); 
         }
-        console.log(results.book_instance); 
+        //console.log(results.book_instance); 
         //successful so render 
         res.render('book_delete', {title: 'Delete Book', book: results.book, book_instances: results.book_instance});    
     });
@@ -181,7 +181,26 @@ exports.book_delete_get = function(req, res, next){
 
 // Handle book delete on POST.
 exports.book_delete_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Book delete POST');
+    async.parallel({
+        book: function(callback){
+            Book.findById(req.body.bookid).exec(callback);
+        },
+        book_instance: function(callback){
+            BookInstance.find({'book': req.body.bookid}).exec(callback); 
+        },
+     }, function(err, results){
+            if(err) {return next(err);}
+            if (results.book_instance.length > 0) {
+                res.render('book_delete', {title: 'Delete Book', book: results.book, book_instances: results.book_instance});  
+                return; 
+            } else {
+                console.log(req.body); 
+                Book.findByIdAndRemove(req.body.bookid, function(err){  
+                    if(err) {return next(err);}
+                    res.redirect('/catalog/books'); 
+                });
+            }
+    });
 };
 
 // Display book update form on GET.
